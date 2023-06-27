@@ -1,14 +1,24 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
 interface stylePropsType {
-  [key: string]: {};
+  rounded?: boolean;
+  size?: 'small' | 'medium' | 'large';
 }
 
 const Box = (props: stylePropsType) => {
+  const sizes = {
+    small: styles.small,
+    medium: styles.medium,
+    large: styles.large,
+  };
   return (
-    <view
-      style={[styles.box, props.rounded && styles.rounded, sizes[props.size]]}
+    <View
+      style={[
+        styles.box,
+        props.rounded && styles.rounded,
+        sizes[props.size || 'medium'],
+      ]}
     />
   );
 };
@@ -17,7 +27,13 @@ Box.defaultProps = {
   size: 'medium',
 };
 
-const styles = StyleSheet.create({
+interface stylesTypes {
+  [key: string]: {
+    [key: string]: number | string;
+  };
+}
+
+const styles: stylesTypes = StyleSheet.create({
   box: {
     backgroundColor: 'black',
   },
@@ -37,11 +53,5 @@ const styles = StyleSheet.create({
     height: 128,
   },
 });
-
-const sizes = {
-  small: styles.small,
-  medium: styles.medium,
-  large: styles.large,
-};
 
 export default Box;
