@@ -4,6 +4,7 @@ import {StyleSheet, View} from 'react-native';
 interface stylePropsType {
   rounded?: boolean;
   size?: 'small' | 'medium' | 'large';
+  color?: string;
 }
 
 const Box = (props: stylePropsType) => {
@@ -15,9 +16,11 @@ const Box = (props: stylePropsType) => {
   return (
     <View
       style={[
-        styles.box,
         props.rounded && styles.rounded,
         sizes[props.size || 'medium'],
+        {
+          backgroundColor: props.color,
+        },
       ]}
     />
   );
@@ -25,6 +28,7 @@ const Box = (props: stylePropsType) => {
 
 Box.defaultProps = {
   size: 'medium',
+  color: 'black',
 };
 
 interface stylesTypes {
@@ -34,9 +38,9 @@ interface stylesTypes {
 }
 
 const styles: stylesTypes = StyleSheet.create({
-  box: {
-    backgroundColor: 'black',
-  },
+  // box: {
+  //   backgroundColor: 'black',
+  // },
   rounded: {
     borderRadius: 16,
   },
